@@ -1,0 +1,83 @@
+{% extends 'Officestaff.html' %}
+{% block content %}
+<body>
+<div class="col-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Add Fees</h4>
+      <form class="forms-sample" method="post" action="{% url 'addfee' %}">
+        {% csrf_token %}
+        
+        <!-- Student Selection -->
+        <div class="form-group">
+            <label for="student">Student</label>
+            <select class="form-control" id="student" name="student" required>
+              {% for student in students %}
+                <option value="{{ student.id }}">{{ student.First_Name }} {{ student.Last_Name }}</option>
+              {% endfor %}
+            </select>
+        </div>
+        
+        <!-- Amount Paid -->
+        <div class="form-group">
+            <label for="amount_paid">Amount Paid</label>
+            <input type="number" class="form-control" id="amount_paid" name="amount_paid" step="0.01" required />
+        </div>
+
+        <!-- Due Amount -->
+        <div class="form-group">
+            <label for="due_amount">Due Amount</label>
+            <input type="number" class="form-control" id="due_amount" name="due_amount" step="0.01" required />
+        </div>
+        
+        <!-- Payment Date -->
+        <div class="form-group">
+            <label for="payment_date">Payment Date</label>
+            <input type="date" class="form-control" id="payment_date" name="payment_date" required />
+        </div>
+
+        <!-- Payment Method -->
+        <div class="form-group">
+            <label for="payment_method">Payment Method</label>
+            <select class="form-control" id="payment_method" name="payment_method" required>
+                <option value="Cash">Cash</option>
+                <option value="Credit">Credit</option>
+                <option value="Bank Transfer">Bank Transfer</option>
+                <option value="Online Payment">Online Payment</option>
+            </select>
+        </div>
+        
+        <!-- Fees Status -->
+        <div class="form-group">
+            <label for="fees_status">Fees Status</label>
+            <select class="form-control" id="fees_status" name="fees_status" required>
+                <option value="Paid">Paid</option>
+                <option value="Unpaid">Unpaid</option>
+                <option value="Paid Partially">Paid Partially</option>
+            </select>
+        </div>
+        
+        <!-- Submit Button -->
+        <div class="form-group text-center">
+            <button type="submit" class="btn btn-info" >Add Fees</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- External Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<!-- SweetAlert Handling for Messages -->
+{% if messages %}
+  {% for message in messages %}
+    <script>
+      swal('{{ message }}', '', '{{ message.tags }}');
+    </script>
+  {% endfor %}
+{% endif %}
+
+</body>
+{% endblock %}

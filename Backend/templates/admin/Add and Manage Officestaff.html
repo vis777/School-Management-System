@@ -1,0 +1,56 @@
+{% extends 'adminindex.html' %}
+{% block content %}
+<div class="col-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Officestaff Details</h4>
+
+      <div class="col-md-10">
+        <div class="card">
+          <div class="table-responsive pt-6">
+            <table class="table table-striped project-orders-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Address</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for d in off %}
+                  <tr>
+                    <td>{{ d.First_Name }} {{ d.Last_Name }}</td>
+                    <td>{{ d.Place }} {{ d.Post }} {{ d.Pin }}</td>
+                    <td>{{ d.Email }}</td>
+                    <td>{{ d.Phone }}</td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <!-- Edit Button -->
+                        <a href="{% url 'edit_officestaff' d.id %}" class="btn btn-success btn-sm btn-icon-text mr-3">
+                          Edit
+                          <i class="typcn typcn-edit btn-icon-append"></i>
+                        </a>
+
+                        <!-- Delete Button -->
+                        <form method="POST" action="{% url 'delete_officestaff' d.id %}" onsubmit="return confirm('Are you sure you want to delete this staff?');" class="mb-0">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-danger btn-sm btn-icon-text">
+                            Delete
+                            <i class="typcn typcn-delete-outline btn-icon-append"></i>
+                          </button>
+                        </form>
+                      </div>
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'adminindex.html' %}
+{% block content %}
+<body>
+<div class="col-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Add Officestaff</h4>
+      <form class="forms-sample" method="post" action="{% url 'add_officestaff' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="exampleInputName1">First Name</label>
+            <input type="text" class="form-control" id="exampleInputName1" name="First_Name" required pattern="[A-Z a-z.]{3,25}" title="First name should contain 3-25 characters, letters only."/>
+        </div>
+    
+        <div class="form-group">
+            <label for="exampleInputName2">Last Name</label>
+            <input type="text" class="form-control" id="exampleInputName2" name="Last_Name" required pattern="[A-Z a-z.]{3,25}" title="Last name should contain 3-25 characters, letters only."/>
+        </div>
+    
+        <div class="form-group">
+            <label for="exampleInputName3">Place</label>
+            <input type="text" class="form-control" id="exampleInputName3" name="Place" required pattern="[A-Z a-z.]{3,25}" title="Place should contain 3-25 characters, letters only."/>
+        </div>
+    
+        <div class="form-group">
+            <label for="exampleInputName4">Post</label>
+            <input type="text" class="form-control" id="exampleInputName4" name="Post" required pattern="[A-Z a-z.]{3,25}" title="Post should contain 3-25 characters, letters only."/>
+        </div>
+    
+        <div class="form-group">
+            <label for="exampleInputName5">Pin</label>
+            <input type="text" class="form-control" id="exampleInputName5" name="Pin" required pattern="[0-9]{6}" title="Pin should contain 6 digits."/>
+        </div>
+    
+        <div class="form-group">
+            <label for="exampleInputName6">Email</label>
+            <input type="email" class="form-control" id="exampleInputName6" name="Email" required pattern="[a-z0-9._%+-]+@[a-z0-9]+\.[a-z]{2,3}" title="Please enter a valid email."/>
+        </div>
+    
+        <div class="form-group">
+            <label for="exampleInputName7">Phone</label>
+            <input type="text" class="form-control" id="exampleInputName7" name="Phone" required pattern="[6789][0-9]{9}" title="Phone number should be 10 digits and start with 6, 7, 8, or 9."/>
+        </div>
+    
+        <div class="form-group">
+            <label for="exampleInputName9">Username</label>
+            <input type="text" class="form-control" id="exampleInputName9" name="UserNaMe"/>
+        </div>
+    
+        <div class="form-group">
+            <label for="exampleInputName10">Password</label>
+            <input type="password" class="form-control" id="exampleInputName10" name="PassWoRd" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Password must contain at least 8 characters, including one uppercase, one lowercase, and one number."/>
+        </div>
+    
+        <div class="form-group text-center">
+            <button type="submit" class="btn btn-info">Add</button>
+        </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+<!-- External Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<!-- SweetAlert Handling for Messages -->
+{% if messages %}
+  {% for i in messages %}
+    <script>
+      swal('{{ i }}', '', '{{ i.tags }}');
+    </script>
+  {% endfor %}
+{% endif %}
+
+</body>
+{% endblock %}

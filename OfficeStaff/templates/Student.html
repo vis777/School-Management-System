@@ -1,0 +1,63 @@
+{% extends 'Officestaff.html' %}
+{% block content %}
+<body>
+<div class="col-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Add Student</h4>
+      <form class="forms-sample" method="post" action="{% url 'addstudent' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="exampleInputName1">First Name</label>
+            <input type="text" class="form-control" id="exampleInputName1" name="First_Name" required pattern="[A-Z a-z.]{3,25}" title="First name should contain 3-25 characters, letters only."/>
+        </div>
+    
+        <div class="form-group">
+            <label for="exampleInputName2">Last Name</label>
+            <input type="text" class="form-control" id="exampleInputName2" name="Last_Name" required pattern="[A-Z a-z.]{3,25}" title="Last name should contain 3-25 characters, letters only."/>
+        </div>
+    
+        <div class="form-group">
+            <label for="exampleInputDOB">Date of Birth</label>
+            <input type="date" class="form-control" id="exampleInputDOB" name="DOB" required title="Please select a valid date."/>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputName4">Class Name</label>
+            <input type="text" class="form-control" id="exampleInputName4" name="Class_Name" required pattern="[A-Za-z0-9 ]{1,50}" title="Class name should contain 1-50 characters."/>
+        </div>
+    
+        <div class="form-group">
+            <label for="exampleInputName6">Email</label>
+            <input type="email" class="form-control" id="exampleInputName6" name="Email" required pattern="[a-z0-9._%+-]+@[a-z0-9]+\.[a-z]{2,3}" title="Please enter a valid email."/>
+        </div>
+    
+        <div class="form-group">
+            <label for="exampleInputName9">Username</label>
+            <input type="text" class="form-control" id="exampleInputName9" name="UserNaMe"/>
+        </div>
+    
+        <div class="form-group text-center">
+            <button type="submit" class="btn btn-info" >Add</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- External Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<!-- SweetAlert Handling for Messages -->
+{% if messages %}
+  {% for i in messages %}
+    <script>
+      swal('{{ i }}', '', '{{ i.tags }}');
+    </script>
+  {% endfor %}
+{% endif %}
+
+</body>
+{% endblock %}

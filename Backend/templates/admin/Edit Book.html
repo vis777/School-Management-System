@@ -1,0 +1,73 @@
+{% extends 'adminindex.html' %}
+{% block content %}
+<body>
+    <div class="col-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Edit Book</h4>
+          <form class="forms-sample" method="post" action="{% url 'edit_book' object.id %}">
+            {% csrf_token %}
+            
+            <!-- Student Selection -->
+            <div class="form-group">
+                <label for="student">Student</label>
+                <select class="form-control" id="student" name="student" required>
+                  {% for student in students %}
+                    <option value="{{ student.id }}" {% if student.id == object.student.id %}selected{% endif %}>
+                      {{ student.First_Name }} {{ student.Last_Name }}
+                    </option>
+                  {% endfor %}
+                </select>
+            </div>
+            
+            <!-- Book Title -->
+            <div class="form-group">
+                <label for="book_title">Book Title</label>
+                <input type="text" class="form-control" id="book_title" name="book_title" value="{{ object.book_title }}" required pattern=".{3,200}" title="Book title should contain 3-200 characters."/>
+            </div>
+    
+            <!-- Status -->
+            <div class="form-group">
+                <label for="status">Status</label>
+                <select class="form-control" id="status" name="status" required>
+                    <option value="borrowed" {% if object.status == 'borrowed' %}selected{% endif %}>Borrowed</option>
+                    <option value="returned" {% if object.status == 'returned' %}selected{% endif %}>Returned</option>
+                </select>
+            </div>
+    
+            <!-- Borrow Date -->
+            <div class="form-group">
+                <label for="borrow_date">Borrow Date</label>
+                <input type="date" class="form-control" id="borrow_date" name="borrow_date" value="{{ object.borrow_date|date:'Y-m-d' }}" required />
+            </div>
+    
+            <!-- Return Date (optional) -->
+            <div class="form-group">
+                <label for="return_date">Return Date (optional)</label>
+                <input type="date" class="form-control" id="return_date" name="return_date" value="{{ object.return_date|date:'Y-m-d' }}" />
+            </div>
+    
+            <!-- Submit Button -->
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-info">Update Book</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    <!-- External Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    
+    <!-- SweetAlert Handling for Messages -->
+    {% if messages %}
+      {% for i in messages %}
+        <script>
+          swal('{{ i }}', '', '{{ i.tags }}');
+        </script>
+      {% endfor %}
+    {% endif %}
+    
+    </body>
+{% endblock %}

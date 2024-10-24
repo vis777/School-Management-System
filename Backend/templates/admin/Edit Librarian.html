@@ -1,0 +1,51 @@
+{% extends 'adminindex.html' %}
+{% block content %}
+<body>
+<div class="col-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Add Librarian</h4>
+<form id="form1" name="form1" method="post" action="{% url 'updatelibrarian' pk=lib.id %}" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="form-group">
+    <label for="exampleInputName1"> First Name</label>
+    <input type="text" class="form-control" id="exampleInputName1" placeholder="Name" name="First_Name" value="{{lib.First_Name}}" required pattern="[A-Z a-z.]{3,25}"/>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputName2"> Last Name</label>
+    <input type="text" class="form-control" id="exampleInputName2" placeholder="Name" name="Last_Name" value="{{lib.Last_Name}}" required pattern="[A-Z a-z.]{3,25}"/>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputName3"> Place</label>
+    <input type="text" class="form-control" id="exampleInputName3" placeholder="Name" name="Place" value="{{lib.Place}}" required pattern="[A-Z a-z.]{3,25}"/>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputName4"> Post</label>
+    <input type="text" class="form-control" id="exampleInputName4" placeholder="Name" name="Post" value="{{lib.Post}}" required pattern="[A-Z a-z.]{3,25}"/>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputName5"> Pin</label>
+    <input type="text" class="form-control" id="exampleInputName5" placeholder="Name" name="Pin" value="{{lib.Pin}}" required pattern="[0-9]{6}"/>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputName6"> Email</label>
+    <input type="text" class="form-control" id="exampleInputName6" placeholder="Name" name="Email" value="{{lib.Email}}" required pattern="[a-z0-9._%+-]+@[a-z0-9]+\.[a-z]{2,3}"/>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputName7"> Phone</label>
+    <input type="text" class="form-control" id="exampleInputName7" placeholder="Name" name="Phone" value="{{lib.Phone}}" required pattern="[6789][0-9]{9}"/>
+  </div>
+
+
+
+         <tr align="center">
+      <td colspan="6"><label>
+            <input type="submit" name="Submit" value="Edit" class="btn btn-info"/>
+        </label>      </td>
+      </tr>
+      </table>
+  </div>
+</form>
+</body>
+</html>
+{% endblock %}
